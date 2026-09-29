@@ -1,0 +1,25 @@
+name: Matrix Testing
+
+on:
+  push:
+
+jobs:
+  test-matrix:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [20, 22]
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run Tests
+        run: echo "Test läuft auf ${{ matrix.os }} mit Node.js ${{ matrix.node-version }}"
